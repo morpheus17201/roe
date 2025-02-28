@@ -49,12 +49,7 @@ mktemp -d|--directory            # Create a temporary directory
 ```bash
 cp -R|--recursive foo bar                               # Copy directory
 mv foo bar                                              # Move directory
-
-rsync -z|--compress -v|--verbose /foo /bar              # Copy directory, overwrites destination
-rsync -a|--archive -z|--compress -v|--verbose /foo /bar # Copy directory, without overwriting destination
-rsync -avz /foo username@hostname:/bar                  # Copy local directory to remote directory
-rsync -avz username@hostname:/foo /bar                  # Copy remote directory to local directory
-```
+``
 
 ## Deleting Directories
 
@@ -67,8 +62,6 @@ rm -r|--recursive -f|--force foo # Delete directory including contents, ignore n
 ## Creating Files
 
 ```bash
-touch foo.txt          # Create file or update existing files modified timestamp
-touch foo.txt bar.txt  # Create multiple files
 touch {foo,bar}.txt    # Create multiple files
 touch test{1..3}       # Create test1, test2 and test3 files
 touch test{a..c}       # Create testa, testb and testc files
@@ -96,9 +89,7 @@ read foo                   # Read from standard input and write to the variable 
 cp foo.txt bar.txt                                # Copy file
 mv foo.txt bar.txt                                # Move file
 
-rsync -z|--compress -v|--verbose /foo.txt /bar    # Copy file quickly if not changed
-rsync z|--compress -v|--verbose /foo.txt /bar.txt # Copy and rename file quickly if not changed
-```
+``
 
 ## Deleting Files
 
@@ -107,16 +98,6 @@ rm foo.txt            # Delete file
 rm -f|--force foo.txt # Delete file, ignore nonexistent files and never prompt
 ```
 
-## Reading Files
-
-```bash
-cat foo.txt            # Print all contents
-less foo.txt           # Print some contents at a time (g - go to top of file, SHIFT+g, go to bottom of file, /foo to search for 'foo')
-head foo.txt           # Print top 10 lines of file
-tail foo.txt           # Print bottom 10 lines of file
-open foo.txt           # Open file in the default editor
-wc foo.txt             # List number of lines words and characters in the file
-```
 
 ## File Permissions
 
@@ -282,57 +263,6 @@ tar -x|--extract -z|--gzip -f|--file=foo.tar.gz # Un-compress foo.tar.gz into cu
 tar -x|--extract -f|--file=foo.tar              # Un-combine foo.tar into current directory
 ```
 
-## Disk Usage
-
-```bash
-df                     # List disks, size, used and available space
-df -h|--human-readable # List disks, size, used and available space in a human readable format
-
-du                     # List current directory, subdirectories and file sizes
-du /foo/bar            # List specified directory, subdirectories and file sizes
-du -h|--human-readable # List current directory, subdirectories and file sizes in a human readable format
-du -d|--max-depth      # List current directory, subdirectories and file sizes within the max depth
-du -d 0                # List current directory size
-```
-
-## Memory Usage
-
-```bash
-free                   # Show memory usage
-free -h|--human        # Show human readable memory usage
-free -h|--human --si   # Show human readable memory usage in power of 1000 instead of 1024
-free -s|--seconds 5    # Show memory usage and update continuously every five seconds
-```
-
-## Packages
-
-```bash
-apt update                   # Refreshes repository index
-apt search wget              # Search for a package
-apt show wget                # List information about the wget package
-apt list --all-versions wget # List all versions of the package
-apt install wget             # Install the latest version of the wget package
-apt install wget=1.2.3       # Install a specific version of the wget package
-apt remove wget              # Removes the wget package
-apt upgrade                  # Upgrades all upgradable packages
-```
-
-## Shutdown and Reboot
-
-```bash
-shutdown                     # Shutdown in 1 minute
-shutdown now "Cya later"     # Immediately shut down
-shutdown +5 "Cya later"      # Shutdown in 5 minutes
-
-shutdown --reboot            # Reboot in 1 minute
-shutdown -r now "Cya later"  # Immediately reboot
-shutdown -r +5 "Cya later"   # Reboot in 5 minutes
-
-shutdown -c                  # Cancel a shutdown or reboot
-
-reboot                       # Reboot now
-reboot -f                    # Force a reboot
-```
 
 ## Identifying Processes
 
@@ -355,15 +285,6 @@ lsof                   # List all open files and the process using them
 lsof -itcp:4000        # Return the process listening on port 4000
 ```
 
-## Process Priority
-
-Process priorities go from -20 (highest) to 19 (lowest).
-
-```bash
-nice -n -20 foo        # Change process priority by name
-renice 20 PID          # Change process priority by PID
-ps -o ni PID           # Return the process priority of PID
-```
 
 ## Killing Processes
 
@@ -463,56 +384,6 @@ dig example.com             # Show complete DNS information
 cat /etc/resolv.conf        # resolv.conf lists nameservers
 ```
 
-## Hardware
-
-```bash
-lsusb                  # List USB devices
-lspci                  # List PCI hardware
-lshw                   # List all hardware
-```
-
-## Terminal Multiplexers
-
-Start multiple terminal sessions. Active sessions persist reboots. `tmux` is more modern than `screen`.
-
-```bash
-tmux             # Start a new session (CTRL-b + d to detach)
-tmux ls          # List all sessions
-tmux attach -t 0 # Reattach to a session
-
-screen           # Start a new session (CTRL-a + d to detach)
-screen -ls       # List all sessions
-screen -R 31166  # Reattach to a session
-
-exit             # Exit a session
-```
-
-## Secure Shell Protocol (SSH)
-
-```bash
-ssh hostname                 # Connect to hostname using your current user name over the default SSH port 22
-ssh -i foo.pem hostname      # Connect to hostname using the identity file
-ssh user@hostname            # Connect to hostname using the user over the default SSH port 22
-ssh user@hostname -p 8765    # Connect to hostname using the user over a custom port
-ssh ssh://user@hostname:8765 # Connect to hostname using the user over a custom port
-```
-
-Set default user and port in `~/.ssh/config`, so you can just enter the name next time:
-
-```bash
-$ cat ~/.ssh/config
-Host name
-  User foo
-  Hostname 127.0.0.1
-  Port 8765
-$ ssh name
-```
-
-## Secure Copy
-
-```bash
-scp foo.txt ubuntu@hostname:/home/ubuntu # Copy foo.txt into the specified remote directory
-```
 
 ## Bash Profile
 
