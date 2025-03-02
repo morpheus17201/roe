@@ -1,3 +1,7 @@
+# Custom data to ignore
+roe4_data/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
