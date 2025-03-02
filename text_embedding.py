@@ -16,7 +16,7 @@ import os
 from fastapi import HTTPException
 
 from base_logger import logger
-from common import OPENAI_API_URL, AIPROXY_TOKEN
+from llm_helper import OPENAI_API_URL, AIPROXY_TOKEN
 
 
 now = datetime.datetime.now()
